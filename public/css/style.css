@@ -239,7 +239,6 @@ body {
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-/* 🏷️ TEAM LABEL */
 .team-carousel-wrapper::before {
     content: "MEET THE TEAM";
     position: absolute;
@@ -267,7 +266,6 @@ body {
     100% { transform: translateX(calc(-240px * 5 - 200px)); }
 }
 
-/* Card Styling */
 .team-card {
     background: white;
     width: 240px;
@@ -288,7 +286,6 @@ body {
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
-/* Stylish Icon Box */
 .icon-box {
     width: 80px;
     height: 80px;
@@ -306,7 +303,6 @@ body {
     transform: rotateY(180deg);
 }
 
-/* Glowing Name Base */
 .glowing-name {
     margin: 10px 0 5px;
     font-size: 1.2rem;
@@ -322,7 +318,6 @@ body {
     font-weight: 500;
 }
 
-/* --- THEME COLORS & GLOWS --- */
 .color-purple .icon-box { background: #f3e5f5; color: #9c27b0; }
 .color-purple .glowing-name { color: #9c27b0; }
 .color-purple:hover { border-color: #9c27b0; }
@@ -354,10 +349,6 @@ body {
     100% { transform: scale(1); text-shadow: 0 0 2px currentColor; }
 }
 
-
-/* ============================
-   🌟 FOOTER (FULL BLEED FIXED)
-   ============================ */
 footer {
     background: #1a1a1a;
     color: #fff;
@@ -366,12 +357,11 @@ footer {
     position: relative;
     z-index: 5;
     
-    /* 🚀 FORCE FULL WIDTH & NO GAP */
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     
-    margin-bottom: 0 !important; /* Forces zero gap at bottom */
+    margin-bottom: 0 !important; 
     bottom: 0;
 }
 
@@ -442,9 +432,6 @@ footer {
     margin: 0 auto;
 }
 
-/* ============================
-   2. AUTH (LOGIN/SIGNUP) - BUBBLES RESTORED
-   ============================ */
 #auth-section {
     display: flex;
     flex-direction: column;
@@ -456,7 +443,7 @@ footer {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 2000;
-    overflow: hidden; /* Keeps bubbles inside */
+    overflow: hidden; 
 }
 
 @keyframes gradientBG {
@@ -465,12 +452,11 @@ footer {
     100% { background-position: 0% 50%; }
 }
 
-/* 🧼 BUBBLES ANIMATION */
 #auth-section::before, #auth-section::after {
     content: '';
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1); /* Visible bubbles */
+    background: rgba(255, 255, 255, 0.1); 
     z-index: 1; 
     pointer-events: none;
     animation: floatShape 20s infinite linear;
@@ -526,7 +512,6 @@ footer {
     max-width: 90%;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.6);
-    /* Card sits ABOVE bubbles */
     position: relative;
     z-index: 5;
     animation: cardEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -613,17 +598,13 @@ footer {
 }
 .message { margin-top: 1.5rem; font-size: 0.95rem; min-height: 24px; font-weight: 500; }
 
-/* ============================
-   3. MODERN DASHBOARD - PRO STYLE
-   ============================ */
 .dashboard-layout {
     display: flex;
     height: 100vh;
-    background-color: #f7f9fa; /* Even softer background */
+    background-color: #f7f9fa; 
     overflow: hidden;
 }
 
-/* Sidebar Styling */
 .sidebar {
     width: var(--sidebar-width);
     background: white;
@@ -648,42 +629,40 @@ footer {
 
 .sidebar-menu {
     list-style: none;
-    padding: 30px 25px; /* Spacious padding */
+    padding: 30px 25px; 
     margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 24px; /* Distinct separation between items */
+    gap: 24px; 
 }
 
-/* 🚀 ANIMATED SIDEBAR BUTTONS */
 .sidebar-menu li a {
     display: flex;
     align-items: center;
-    padding: 18px 24px; /* Chunky, clickable area */
+    padding: 18px 24px; 
     color: #666;
     text-decoration: none;
-    border-radius: 20px; /* Modern pill shape */
+    border-radius: 20px; 
     font-weight: 600;
     font-size: 1.05rem;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     background: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03); /* Subtle initial shadow */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
     border: 1px solid rgba(0,0,0,0.02);
     position: relative;
     overflow: hidden;
 }
 
-/* Hover Effect */
+
 .sidebar-menu li a:hover {
     background: white;
-    transform: translateY(-4px); /* Physical lift */
-    box-shadow: 0 15px 35px rgba(0, 128, 128, 0.12); /* Soft teal glow */
+    transform: translateY(-4px); 
+    box-shadow: 0 15px 35px rgba(0, 128, 128, 0.12); 
     color: var(--primary);
     border-color: rgba(0, 128, 128, 0.15);
 }
 
-/* Icon Rotation on Hover */
 .sidebar-menu li a:hover i {
     transform: scale(1.15) rotate(5deg);
     color: var(--primary);
@@ -697,8 +676,6 @@ footer {
     transition: transform 0.3s ease;
     color: #aaa;
 }
-
-/* Active State - Professional & Clean */
 .sidebar-menu li a.active {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
@@ -712,7 +689,6 @@ footer {
     transform: scale(1.1);
 }
 
-/* Subtle Shine Animation on Active Tab */
 .sidebar-menu li a.active::after {
     content: '';
     position: absolute;
@@ -748,7 +724,6 @@ footer {
     box-shadow: 0 5px 15px rgba(229, 57, 53, 0.15);
 }
 
-/* Main Content */
 .dashboard-main {
     flex: 1;
     display: flex;
@@ -758,7 +733,7 @@ footer {
 
 .dashboard-topbar {
     height: 100px;
-    background: white; /* Transparent or white */
+    background: white; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -788,7 +763,6 @@ footer {
 .content-wrapper { padding: 50px; animation: fadeIn 0.5s ease; max-width: 1400px; margin: 0 auto; width: 100%; box-sizing: border-box; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Cards & Tables */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -829,9 +803,6 @@ td:last-child { border-top-right-radius: 15px; border-bottom-right-radius: 15px;
 .status.confirmed { background: #e0f2f1; color: #00695c; }
 .status.pending { background: #fff3e0; color: #ef6c00; }
 
-/* ============================
-   4. CHATBOT WIDGET
-   ============================ */
 #chatbot-widget {
     position: fixed;
     bottom: 30px;
@@ -958,10 +929,6 @@ td:last-child { border-top-right-radius: 15px; border-bottom-right-radius: 15px;
     border-bottom-right-radius: 4px;
     box-shadow: 0 4px 15px rgba(0,128,128,0.2);
 }
-
-/* ============================
-   5. WELCOME CARD (PRO STYLE)
-   ============================ */
 .welcome-card {
     background: linear-gradient(135deg, #008080 0%, #005555 100%);
     color: white;
@@ -976,7 +943,6 @@ td:last-child { border-top-right-radius: 15px; border-bottom-right-radius: 15px;
     overflow: hidden;
 }
 
-/* Decorative Circle */
 .welcome-card::after {
     content: '';
     position: absolute;
@@ -1024,7 +990,6 @@ td:last-child { border-top-right-radius: 15px; border-bottom-right-radius: 15px;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
-/* Make calendar buttons match your theme */
 .fc-button-primary {
     background-color: var(--primary) !important;
     border-color: var(--primary) !important;
@@ -1036,9 +1001,6 @@ td:last-child { border-top-right-radius: 15px; border-bottom-right-radius: 15px;
 .fc-v-event {
     background-color: var(--primary);
 }
-/* ============================
-   🌙 DARK MODE OVERRIDES
-   ============================ */
 
 body.dark-mode {
     --bg-light: #121212;
@@ -1050,7 +1012,7 @@ body.dark-mode {
     color: var(--text-dark);
 }
 
-/* Force Dark Backgrounds on Components */
+
 body.dark-mode .sidebar,
 body.dark-mode .dashboard-topbar,
 body.dark-mode .stat-card,
@@ -1067,7 +1029,6 @@ body.dark-mode select {
     box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
 }
 
-/* Fix Text Colors inside Cards */
 body.dark-mode h2, 
 body.dark-mode h3, 
 body.dark-mode strong {
@@ -1083,7 +1044,6 @@ body.dark-mode .nav-links a {
     color: #bbb;
 }
 
-/* Calendar Specifics */
 body.dark-mode .fc-theme-standard td, 
 body.dark-mode .fc-theme-standard th {
     border-color: #444 !important;
@@ -1092,7 +1052,6 @@ body.dark-mode .fc-toolbar-title {
     color: white !important;
 }
 
-/* Chatbot Dark Mode */
 body.dark-mode #chat-body {
     background-color: #1e1e1e;
     border-color: #333;
@@ -1113,7 +1072,6 @@ body.dark-mode .chat-input input {
     color: white;
 }
 
-/* Theme Toggle Button Style */
 .theme-btn {
     background: none;
     border: 2px solid var(--primary);

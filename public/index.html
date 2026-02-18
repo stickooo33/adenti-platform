@@ -11,12 +11,10 @@
 </head>
 <body>
 
-    <!-- 🌟 SECTION 1: LANDING PAGE WRAPPER -->
     <div id="landing-section" class="active-section">
-        <!-- 🎨 DYNAMIC BACKGROUND CANVAS -->
         <canvas id="hero-canvas"></canvas>
         
-        <!-- Navigation -->
+
         <nav class="landing-nav">
             <div class="logo"><i class="fa-solid fa-tooth"></i> ADENTI</div>
             <div class="nav-links">
@@ -32,7 +30,6 @@
     </button>
         </nav>
 
-        <!-- Hero Header -->
         <header class="hero">
             <div class="hero-text">
                 <h1>Your Smile, <br> Our <span class="highlight">Passion</span>.</h1>
@@ -44,7 +41,6 @@
             </div>
         </header>
 
-        <!-- Services Section -->
         <section id="services" class="info-section">
             <h2 class="section-title">Our Expertise</h2>
             <div class="cards-container">
@@ -66,7 +62,7 @@
             </div>
         </section>
 
-        <!-- About Section (The Team) -->
+       
         <section id="about" class="info-section bg-white">
             <div class="about-header">
                 <h2 class="section-title">Meet The Minds Behind ADENTI</h2>
@@ -76,10 +72,10 @@
                 </p>
             </div>
 
-            <!-- 🌟 TEAM CAROUSEL -->
+           
             <div class="team-carousel-wrapper">
                 <div class="team-track">
-                    <!-- Team Members -->
+                    
                     <div class="team-card glow-card color-purple">
                         <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
                         <h3 class="glowing-name">Romaysae Aakram</h3>
@@ -106,7 +102,6 @@
                         <p>Front-end developer</p>
                     </div>
                     
-                    <!-- Duplicates for Infinite Scroll -->
                     <div class="team-card glow-card color-purple">
                         <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
                         <h3 class="glowing-name">Romaysae Aakram</h3>
@@ -136,7 +131,6 @@
             </div>
         </section>
 
-        <!-- Footer / Contact (Last element of the landing section) -->
         <footer id="contact">
             <div class="footer-content">
                 <div class="footer-col">
@@ -159,7 +153,6 @@
         </footer>
     </div>
 
-    <!-- 🔐 SECTION 2: AUTHENTICATION -->
     <div id="auth-section" class="section hidden">
         <button onclick="goBackHome()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
         <div class="auth-card animate-up">
@@ -195,7 +188,6 @@
         </div>
     </div>
 
-    <!-- 📊 SECTION 3: DASHBOARD -->
     <div id="dashboard-section" class="section hidden">
         <div class="dashboard-layout">
             <aside class="sidebar">
@@ -217,8 +209,6 @@
             </main>
         </div>
     </div>
-
-    <!-- 🤖 CHATBOT WIDGET -->
     <div id="chatbot-widget">
         <button onclick="toggleChat()" id="chat-toggle-btn">
             <i class="fa-solid fa-robot"></i>

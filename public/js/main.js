@@ -1,19 +1,15 @@
-// 🌙 DARK MODE MANAGER
-
-// 1. Run immediately on load to prevent "White Flash"
 (function() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
     }
-    // Update icons after DOM is ready
+    
     document.addEventListener('DOMContentLoaded', () => {
         updateAllThemeIcons();
-        injectDarkStyles(); // 🛠️ Fix visibility issues immediately
+        injectDarkStyles(); 
     });
 })();
 
-// 2. Global Toggle Function
 window.toggleTheme = function() {
     const body = document.body;
     body.classList.toggle('dark-mode');
@@ -23,16 +19,16 @@ window.toggleTheme = function() {
     
     updateAllThemeIcons();
     
-    // Optional: Force FullCalendar to redraw if it exists (fixes dark mode borders)
+    // optionel hadi
     if (typeof Calendar !== 'undefined') {
         window.dispatchEvent(new Event('resize'));
     }
 };
 
-// 3. Update all instances of the button (Landing & Dashboard)
+
 function updateAllThemeIcons() {
     const isDark = document.body.classList.contains('dark-mode');
-    const buttons = document.querySelectorAll('.theme-btn'); // Select ALL theme buttons
+    const buttons = document.querySelectorAll('.theme-btn'); 
     
     buttons.forEach(btn => {
         if (isDark) {
@@ -41,15 +37,12 @@ function updateAllThemeIcons() {
             btn.style.color = '#ffd700';
         } else {
             btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-            btn.style.borderColor = 'var(--primary)'; // Will use CSS variable if set, or fallback
+            btn.style.borderColor = 'var(--primary)'; 
             btn.style.color = 'var(--primary)';
         }
     });
 }
-
-// 4. 🛠️ Inject CSS fixes for "Disappearing Text"
 function injectDarkStyles() {
-    // Prevent duplicate injection
     if (document.getElementById('dark-mode-patch')) return;
     
     const style = document.createElement('style');

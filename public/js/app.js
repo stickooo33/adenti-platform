@@ -1,4 +1,4 @@
-// 🚀 DEPLOYMENT FIX: Automatically detect if on Localhost or Render
+
 const API_URL = window.location.origin + '/api';
 
 let currentUser = null; 
@@ -6,12 +6,8 @@ let currentAppointments = [];
 let currentRating = localStorage.getItem('clinicRating') || 4.9; 
 let ratingCount = Number(localStorage.getItem('clinicRatingCount')) || 1;
 
-// 🔊 Notification Sound
 const notifSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
 
-// ==========================================
-// 🍞 PRO TOAST NOTIFICATION SYSTEM
-// ==========================================
 function showToast(type, title, message, duration = 4000) {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -40,7 +36,6 @@ function showToast(type, title, message, duration = 4000) {
 
     container.appendChild(toast);
     
-    // Force a reflow to trigger animation
     toast.offsetHeight; 
     
     setTimeout(() => toast.classList.add('show'), 10);
@@ -57,9 +52,6 @@ function showToast(type, title, message, duration = 4000) {
     };
 }
 
-// ==========================================
-// 0. SOCKET.IO (REAL-TIME NOTIFICATIONS)
-// ==========================================
 let socket;
 try {
     socket = io(); 
@@ -93,7 +85,6 @@ try {
         if (currentUser && currentUser.role === 'dentist') {
             switchView('schedule');
         }
-        // Refresh secretary view if looking at appointments
         if (currentUser && currentUser.role === 'secretary') {
              const currentView = document.querySelector('.sidebar-menu a.active')?.innerText;
              if (currentView?.includes('Appointments')) switchView('appointments');
@@ -104,9 +95,6 @@ try {
     console.warn("Socket.io not connected. Using local mode.");
 }
 
-// ==========================================
-// 1. NAVIGATION & UI LOGIC
-// ==========================================
 function enterPortal() {
     document.getElementById('landing-section').classList.add('hidden');
     document.getElementById('auth-section').classList.remove('hidden');
@@ -154,9 +142,6 @@ function setActiveLink(element) {
     element.classList.add('active');
 }
 
-// ==========================================
-// 2. AUTHENTICATION
-// ==========================================
 const signupForm = document.getElementById('signup-form');
 if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
@@ -214,9 +199,6 @@ if (loginForm) {
     });
 }
 
-// ==========================================
-// 3. DASHBOARD ENGINE
-// ==========================================
 async function loadDashboard(user) {
     document.getElementById('auth-section').classList.add('hidden');
     document.getElementById('landing-section').classList.add('hidden');
@@ -227,7 +209,6 @@ async function loadDashboard(user) {
     
     const profileDiv = document.querySelector('.user-profile');
     if (profileDiv) {
-        // Includes Theme Toggle Button
         profileDiv.innerHTML = `
             <button class="theme-btn" onclick="toggleTheme()" style="margin-right:20px;">
                 <i class="fa-solid fa-moon"></i>
@@ -317,7 +298,6 @@ function switchView(viewName, element) {
         const rows = Object.values(uniquePatients).map(p => `<tr><td style="font-weight:bold;">${p.name}</td><td>${p.lastVisit}</td><td>${p.total} Visits</td><td><button onclick="viewPatientRecord('${p.name}')" style="border:none; background:#e0f2f1; color:teal; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:600;"><i class="fa-solid fa-eye"></i> View Record</button></td></tr>`).join('');
         content.innerHTML = `<h2><i class="fa-solid fa-users"></i> Patient List</h2><div class="recent-table" style="margin-top:20px;"><table><thead><tr><th>Name</th><th>Last Visit</th><th>Total Visits</th><th>Action</th></tr></thead><tbody>${rows || '<tr><td colspan="4">No patients found.</td></tr>'}</tbody></table></div>`;
     }
-    // PATIENT HISTORY (WITH RE-BOOK BUTTON)
     else if (viewName === 'history' && currentUser.role === 'patient') {
         const rows = currentAppointments.map(a => {
             const isCancelled = a.status.toLowerCase() === 'cancelled';
@@ -356,7 +336,6 @@ function switchView(viewName, element) {
                 </table>
             </div>`;
     }
-    // SECRETARY VIEWS (WITH ADMIN RESCHEDULE)
     else if (viewName === 'appointments' && currentUser.role === 'secretary') {
         const rows = currentAppointments.map(a => `
             <tr>
@@ -489,9 +468,6 @@ async function updateStatus(id, status) {
     }
 }
 
-// ==========================================
-// 🔄 PATIENT RE-BOOK LOGIC
-// ==========================================
 function prepareReschedule(id) {
     const appt = currentAppointments.find(a => a.id == id);
     if (!appt) return;
@@ -513,9 +489,6 @@ function prepareReschedule(id) {
     }, 100);
 }
 
-// ==========================================
-// 🛠️ SECRETARY ADMIN RESCHEDULE MODAL
-// ==========================================
 function openAdminReschedule(id) {
     const appt = currentAppointments.find(a => a.id == id);
     if (!appt) return;
@@ -563,11 +536,9 @@ async function confirmAdminReschedule(id) {
             showToast('success', 'Rescheduled', 'Appointment updated successfully');
             document.getElementById('reschedule-modal').remove();
             
-            // Update local state immediately so UI reflects change
             const appt = currentAppointments.find(a => a.id == id);
             if(appt) { appt.date = date; appt.time = time; appt.status = 'Confirmed'; }
-            
-            // Refresh the current view
+           
             switchView('appointments');
         }
     } catch(e) {
@@ -575,9 +546,6 @@ async function confirmAdminReschedule(id) {
     }
 }
 
-// ==========================================
-// 🤖 CHATBOT LOGIC (TYPING INDICATOR + TOASTS)
-// ==========================================
 async function sendMessage() {
     const input = document.getElementById('chat-input');
     const msg = input.value.trim();
@@ -588,7 +556,6 @@ async function sendMessage() {
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Show Typing indicator
     const typingDiv = document.createElement('div');
     typingDiv.id = 'typing-indicator';
     typingDiv.className = 'message bot typing';
@@ -596,7 +563,6 @@ async function sendMessage() {
     chatBox.appendChild(typingDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 🚀 DEPLOYMENT FIX: Use Node Proxy to hit Python
     try {
         const res = await fetch(`${API_URL}/chat`, { 
             method: 'POST', 
@@ -619,7 +585,6 @@ document.getElementById('chat-input')?.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-// CANVAS ANIMATION
 window.initCanvas = function() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return; 
@@ -679,9 +644,6 @@ window.initCanvas = function() {
 
 if(document.getElementById('hero-canvas')) window.initCanvas();
 
-// ==========================================
-// 📅 VISUAL CALENDAR ENGINE
-// ==========================================
 function initVisualCalendar() {
     const calendarEl = document.getElementById('calendar');
     if (!calendarEl || typeof FullCalendar === 'undefined') return;
@@ -714,7 +676,6 @@ function initVisualCalendar() {
     calendar.render();
 }
 
-// REVEAL ANIMATIONS AND DYNAMIC STYLES
 const styleSheet = document.createElement("style");
 styleSheet.textContent = `
     .reveal-element { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); } 
