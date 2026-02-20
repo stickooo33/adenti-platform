@@ -1095,3 +1095,145 @@ body.dark-mode .theme-btn {
 .theme-btn:hover {
     transform: rotate(15deg) scale(1.1);
 }
+/* =========================================================
+   📱 MOBILE RESPONSIVENESS (Screens under 768px)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    
+    /* --- 1. Navigation Bar --- */
+    .landing-nav {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+        justify-content: space-between;
+    }
+    .nav-links {
+        order: 3; /* Pushes links to a new row */
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+    .login-trigger-btn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+
+    /* --- 2. Hero Section --- */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 120px 20px 40px 20px;
+        gap: 40px;
+    }
+    .hero-text h1 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    .hero-text h2 {
+        font-size: 1.1rem;
+        margin: 0 auto 30px auto;
+    }
+    .hero-visual {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* --- 3. Services Grid --- */
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 15px;
+    }
+    .service-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    /* --- 4. Team Section (Mobile Scroll) --- */
+    .team-carousel-wrapper {
+        overflow-x: auto;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .team-track {
+        display: flex;
+        gap: 15px;
+    }
+    .team-card {
+        flex: 0 0 85%; /* Shows one card at a time on mobile */
+        scroll-snap-align: center;
+    }
+
+    /* --- 5. Footer --- */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    /* --- 6. Auth Portal (Login/Signup) --- */
+    .auth-card {
+        width: 92%;
+        padding: 2rem 1.5rem;
+        margin-top: 20px;
+    }
+    .auth-card h2, .logo-small {
+        font-size: 1.5rem;
+    }
+
+    /* --- 7. Dashboard Layout --- */
+    .dashboard-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color, #eee);
+    }
+    .sidebar-menu {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+        margin: 0;
+        padding-bottom: 5px;
+    }
+    .sidebar-menu li {
+        white-space: nowrap;
+    }
+    .dashboard-main {
+        padding: 15px;
+    }
+    .dashboard-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    /* --- 8. AI Chatbot Widget --- */
+    #chat-body {
+        width: 90vw;
+        right: 5vw;
+        bottom: 80px;
+        height: 60vh;
+    }
+}
+
+/* Fix for very small phones (like iPhone SE) */
+@media screen and (max-width: 400px) {
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+    }
+}
