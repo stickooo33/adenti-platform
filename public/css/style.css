@@ -1282,3 +1282,128 @@ body.dark-mode .theme-btn {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     pointer-events: none;
 }
+/* --- STYLES POUR LA SECTION PROJET ET LE LOGO --- */
+
+.project-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fafa 100%);
+    padding: 80px 10%;
+}
+
+.split-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.split-layout .text-content {
+    flex: 1;
+}
+
+.split-layout .image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge-tech {
+    display: inline-block;
+    background: rgba(0, 128, 128, 0.1);
+    color: #008080;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.project-description {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.project-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.project-list li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.project-list li i {
+    color: #008080;
+    background: white;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 128, 128, 0.15);
+}
+
+.logo-showcase {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.floating-logo {
+            width: 70%;
+            z-index: 2;
+            animation: floatLogo 4s ease-in-out infinite;
+            border-radius: 50%; 
+            background-color: white; 
+            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.15);  
+            object-fit: cover;
+        }
+
+.glow-effect-logo {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(64, 224, 208, 0.4) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes floatLogo {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+/* Responsive pour mobile */
+@media (max-width: 900px) {
+    .split-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+    .section-title {
+        text-align: center !important;
+    }
+    .project-list li {
+        justify-content: center;
+    }
+}
