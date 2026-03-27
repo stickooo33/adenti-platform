@@ -132,7 +132,7 @@ def get_bot_response(msg, session_id=None):
         context["type"] = None
         context["date"] = None
         return {
-            "reply": f"Parfait, j'ai préparé votre demande de RDV pour un {c_type} le {c_date}.,
+            "reply": f"Parfait, j'ai préparé votre demande de RDV pour un {c_type} le {c_date}.",
             "action": "CREATE_APPOINTMENT",
             "details": {
                 "type": c_type,
