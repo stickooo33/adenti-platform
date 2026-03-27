@@ -160,7 +160,7 @@ app.post('/api/chat', async (req, res) => {
         res.json(response.data);
     } catch (e) {
         console.error("AI Service Error:", e.message);
-        res.json({ reply: "I am currently offline. Please call the clinic directly! 📞" });
+        res.json({ reply: "je suis actuellement Offline ,veuillez contacter la clinique directement 📞" });
     }
 });
 

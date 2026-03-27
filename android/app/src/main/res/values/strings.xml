@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Adenti</string>
+    <string name="title_activity_main">Adenti</string>
+    <string name="package_name">com.adenti.app</string>
+    <string name="custom_url_scheme">com.adenti.app</string>
+</resources>
