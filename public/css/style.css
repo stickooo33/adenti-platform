@@ -436,14 +436,16 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Permet au contenu de démarrer en haut si l'écran est petit */
+    padding: 40px 20px; /* Ajoute de l'espace pour pouvoir défiler (scroller) correctement */
     background: linear-gradient(-45deg, #008080, #005c5c, #20b2aa, #40e0d0);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 2000;
-    overflow: hidden; 
+    overflow-y: auto; /* Active la barre de défilement verticale si le formulaire est trop grand */
+    overflow-x: hidden; 
 }
 
 @keyframes gradientBG {
@@ -454,7 +456,7 @@ footer {
 
 #auth-section::before, #auth-section::after {
     content: '';
-    position: absolute;
+    position: fixed; /* Garde les formes de fond fixes même quand on scrolle */
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1); 
     z-index: 1; 
@@ -515,6 +517,8 @@ footer {
     position: relative;
     z-index: 5;
     animation: cardEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    margin: auto; /* Centre la carte verticalement si l'écran est assez grand */
+    flex-shrink: 0; /* Empêche la carte de s'écraser si le formulaire devient grand ! */
 }
 
 @keyframes cardEntrance {
@@ -555,29 +559,35 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.input-group { position: relative; margin-bottom: 1.5rem; }
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Contrôle l'espacement parfait entre les champs */
+}
+
+.input-group { position: relative; margin-bottom: 0; }
 .input-group i { 
-    position: absolute; left: 20px; top: 50%; transform: translateY(-50%); 
-    color: #bbb; transition: color 0.3s; font-size: 1.1rem;
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%); 
+    color: #94a3b8; transition: color 0.3s; font-size: 1.1rem; z-index: 2;
 }
 .input-group input, .input-group select {
-    width: 100%; padding: 16px 20px 16px 55px;
-    border: 2px solid transparent; 
-    border-radius: 14px;
-    background: #f4f8f8;
+    width: 100%; padding: 0 15px 0 45px; /* 45px de marge à gauche pour faire de la place à l'icône ! */
+    border: 1px solid #e2e8f0; 
+    border-radius: 12px;
+    background: #f8fafc;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
-    color: #333;
+    color: #334155;
+    height: 50px; /* Fixe la hauteur pour un design régulier */
 }
-.input-group input:focus, .input-group select:focus { 
+.input-group:focus-within input, .input-group:focus-within select { 
     border-color: var(--primary); 
     background: white;
-    box-shadow: 0 8px 20px rgba(0,128,128,0.08);
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
     outline: none; 
-    transform: translateY(-2px); 
 }
-.input-group input:focus + i { color: var(--primary); }
+.input-group:focus-within i { color: var(--primary); }
 
 .cta-btn {
     width: 100%; padding: 16px;
@@ -1179,7 +1189,7 @@ body.dark-mode .theme-btn {
     .auth-card {
         width: 92%;
         padding: 2rem 1.5rem;
-        margin-top: 20px;
+        margin: 40px auto; /* Maintient la carte centrée et ajoute de l'espace */
     }
     .auth-card h2, .logo-small {
         font-size: 1.5rem;

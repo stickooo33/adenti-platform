@@ -1,12 +1,5 @@
 const API_URL = window.location.origin + '/api';
 
-// Persister un identifiant de session pour le chatbot (flow multi-message)
-let chatSessionId = localStorage.getItem('adenti_chat_session_id');
-if (!chatSessionId) {
-    chatSessionId = window.crypto?.randomUUID?.() || `session-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    localStorage.setItem('adenti_chat_session_id', chatSessionId);
-}
-
 let currentUser = null; 
 let currentAppointments = []; 
 
@@ -217,17 +210,30 @@ const signupForm = document.getElementById('signup-form');
 if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const fullName = document.getElementById('signup-name').value;
+        
+        // 🌟 1. On récupère les valeurs (avec 'name' au lieu de 'fullName')
+        const name = document.getElementById('signup-name').value;
         const email = document.getElementById('signup-email').value;
+        const phone = document.getElementById('signup-phone').value;
         const password = document.getElementById('signup-password').value;
         const role = document.getElementById('signup-role').value;
         const accessCode = document.getElementById('signup-code').value;
 
+        // 🌟 2. VALIDATION STRICTE DU NUMÉRO DE TÉLÉPHONE (Format Marocain)
+        const phoneRegex = /^(0[567]\d{8}|\+212[567]\d{8})$/;
+        const cleanPhone = phone.replace(/\s+/g, '');
+
+        if (!phoneRegex.test(cleanPhone)) {
+            showToast('error', 'Numéro Invalide', 'Veuillez entrer un numéro marocain valide (ex: 06... ou +212...).');
+            return; // On stoppe l'inscription immédiatement !
+        }
+
         try {
+            // 🌟 3. Envoi au serveur (on envoie bien 'name' et 'phone')
             const res = await fetch(`${API_URL}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fullName, email, password, role, accessCode })
+                body: JSON.stringify({ name, email, phone: cleanPhone, password, role, accessCode })
             });
             const data = await res.json();
             
@@ -297,9 +303,6 @@ async function loadDashboard(user) {
     const profileDiv = document.querySelector('.user-profile');
     if (profileDiv) {
         profileDiv.innerHTML = `
-            <button class="theme-btn" onclick="toggleTheme()" style="margin-right:20px;">
-                <i class="fa-solid fa-moon"></i>
-            </button>
             <div style="text-align: right; margin-right: 15px;">
                 <div style="font-weight: 700; color: #333; font-size: 1rem;">${timeGreeting}, ${user.name.split(' ')[0]}</div>
                 <div style="font-size: 0.85rem; color: #888; text-transform: capitalize; font-weight: 500;">${user.role === 'dentist' ? 'Dentiste' : user.role === 'secretary' ? 'Secrétaire' : 'Patient'}</div>
@@ -928,7 +931,7 @@ async function sendMessage() {
         const res = await fetch(`${API_URL}/chat`, { 
             method: 'POST', 
             headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ message: msg, sessionId: chatSessionId }) 
+            body: JSON.stringify({ message: msg }) 
         });
         const data = await res.json();
         

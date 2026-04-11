@@ -40,8 +40,11 @@ io.on('connection', (socket) => {
 
 // 1. AUTHENTICATION
 app.post('/api/signup', (req, res) => {
-    const { fullName, email, password, role, accessCode } = req.body;
-    if (!fullName || !email || !password) return res.status(400).json({ success: false, message: 'Missing fields!' });
+    // 🌟 CORRECTION : On accepte 'name' (envoyé par le frontend)
+    const { name, fullName, email, phone, password, role, accessCode } = req.body;
+    const finalName = name || fullName;
+    
+    if (!finalName || !email || !phone || !password) return res.status(400).json({ success: false, message: 'Missing fields!' });
 
     if (users.find(u => u.email === email)) return res.status(400).json({ success: false, message: 'Email taken!' });
 
@@ -53,7 +56,8 @@ app.post('/api/signup', (req, res) => {
         if (users.filter(u => u.role === 'secretary').length >= MAX_SECRETARIES) return res.status(403).json({ success: false, message: 'Secretary limit reached.' });
     }
 
-    const newUser = { id: Date.now(), fullName, email, password, role: role || 'patient', createdAt: new Date().toISOString() };
+    // 🌟 CORRECTION : On enregistre le finalName
+    const newUser = { id: Date.now(), fullName: finalName, email, phone, password, role: role || 'patient', createdAt: new Date().toISOString() };
     users.push(newUser);
     res.json({ success: true, message: 'Account created!' });
 });
@@ -66,13 +70,13 @@ app.post('/api/login', (req, res) => {
     
     // Backdoor for Demo (so you can log in immediately)
     if (!user) {
-        if(email.includes('admin')) user = { id: 999, fullName: 'Demo Secretary', role: 'secretary' };
-        else if(email.includes('doc')) user = { id: 888, fullName: 'Dr. Dentist', role: 'dentist' };
-        else if(email.includes('pat')) user = { id: 777, fullName: 'Demo Patient', role: 'patient' };
+        if(email.includes('admin')) user = { id: 999, fullName: 'Demo Secretary', role: 'secretary', phone: '0600000000' };
+        else if(email.includes('doc')) user = { id: 888, fullName: 'Dr. Dentist', role: 'dentist', phone: '0600000000' };
+        else if(email.includes('pat')) user = { id: 777, fullName: 'Demo Patient', role: 'patient', phone: '0600000000' };
     }
 
     if (user) {
-        res.json({ success: true, user: { id: user.id, name: user.fullName, role: user.role, email: user.email } });
+        res.json({ success: true, user: { id: user.id, name: user.fullName, role: user.role, email: user.email, phone: user.phone } });
     } else {
         res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
